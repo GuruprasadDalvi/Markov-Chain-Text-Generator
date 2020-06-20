@@ -62,14 +62,13 @@ def getVideoIds():
 
 def getCommentsFrom(VideoId):
     #store All Unfilterde Comments
-    APIkey="AIzaSyAu-WXH7oDxw9x1rDS21BL2gNlWxEbvVdI"
-    nextPageToken = ""
-    url = f"https://www.googleapis.com/youtube/v3/commentThreads?key={APIkey}&textFormat=plainText&part=snippet&videoId={VideoId}&t&maxResults={100}&pageToken={nextPageToken}&start-index={0}"
+    APIkey="--YOUR API KEY HERE--"
+    url = f"https://www.googleapis.com/youtube/v3/commentThreads?key={APIkey}&textFormat=plainText&part=snippet&videoId={VideoId}&t&maxResults={100}&start-index={0}"
     json_url = urllib.request.urlopen(url)
     data = json.loads(json_url.read())
-    numberOfComments = len(data['items'])
+    numOfComments = len(data['items'])
 
-    for i in range(numberOfComments):
+    for i in range(numOfComments):
         usernamesAndComments = f"{data['items'][i]['snippet']['topLevelComment']['snippet']['authorDisplayName']}\t{data['items'][i]['snippet']['topLevelComment']['snippet']['textDisplay']}".replace('\n'," ").replace('\r'," ")
         comments=usernamesAndComments.split("	")[1]
         filterComments(comments)
